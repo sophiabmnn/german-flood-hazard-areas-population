@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flood Hazard Areas in Germany</title>
+
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-size: 20px;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      text-rendering: optimizeLegibility;
+    }
+
+    .content {
+      max-width: 640px;
+      margin: auto;
+    }
+
+    .header {
+      padding: 3em 0;
+    }
+
+    a {
+      color: #009076;
+    }
+
+    .footer {
+      background: #C9C5B1;
+      text-align: center;
+      font-size: 0.8em;
+      margin-top: 4em;
+      padding: 4em 0;
+    }
+
+    figure {
+      margin: 0;
+      padding-bottom: 1.2em;
+    }
+
+    figcaption {
+      font-size: 0.8em;
+      text-align: center;
+      margin-top: 0.5em;
+      color: #666;
+    }
+
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-weight: bold;
+      background-color: #C9C5B1;
+      text-align: center;
+      padding: 1em !important;
+      font-size: 2.5em;
+      line-height: 1.1;
+      opacity: 0.8;
+    }
+
+    .subhead {
+      font-family: 'Lora', Georgia, serif;
+      font-weight: bold;
+    }
+
+    iframe,
+    img,
+    video {
+      max-width: 100%;
+    }
+
+    p {
+      line-height: 1.6;
+      margin: 0;
+      padding-bottom: 1.2em;
+    }
+
+    ul {
+      margin: 0;
+      padding-bottom: 1em;
+      line-height: 1.6;
+    }
+
+    iframe {
+      padding-bottom: 1.2em;
+    }
+
+    .full-width figure {
+      text-align: center;
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      background: #fff880;
+    }
+
+    /* margin on mobile */
+    @media (max-width: 640px) {
+      body {
+        font-size: 18px;
+      }
+
+      .content {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
+    }
+  </style>
+  <style>
+.with-image-bg,
+    {
+      position: relative;
+      background-size: cover;
+      margin-bottom: 2em;
+
+      /* Center everything inside */
+      min-height: 70svh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      /* White text with a shadow */
+      color: white;
+      text-shadow: 0px 0px 30px black,
+      0px 0px 10px rgba(0, 0, 0, 0.5);
+      }
+    
+.with-image-bg 
+    {
+      background-image: url('ahrtal.jpg');
+      background-size: cover;
+      background-repeat: no-repeat; 
+      background-position: center 65%;
+      margin-bottom: 2em;
+    }
+  </style>
+  
+  <link href="scrolly-styles.css" rel="stylesheet">
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
+
+
+
+
+</head>
+
+<body>
+  <div class="header with-image-bg">
+    <div class="content">
+      <h1>How densely populated are Germany's flood hazard areas? </h1>
+    </div>
+  </div>
+  <div class="content">
+    <p class="subhead">In previous years, Germany has been repeatedly affected by flood disasters. An analysis now shows that still around one-fifth of high-risk areas remain populated.</p>
+    <div class="subhead"> <p>By Sophia Baumann</p> </div>
+    <p>In July 2021, 135 people died in the Ahr Valley, a region in western Germany. They were surprised by a flood disaster that also claimed lives in other regions of Germany. This is not the first or only flood event in Germany, although it is a particularly drastic example: in 2016, flooding in Bavaria cost several lives; in 2013, several areas in eastern Germany were affected; and in 2002, a so-called “century flood” hit several Central European countries.</p>
+    <p>The German government has long since designated areas that are particularly at risk of fluvial flooding. These are divided into three risk categories: “low risk” if flooding is expected to occur once every 200 years; “medium risk” for regions that statistically can expect flooding once every 100 years; and “high risk,” which means that flooding occurs approximately once every 10 to 30 years.</p>
+  </div>
+  <section id="scrolly-images" class="scrolly-container">
+    <div class="sticky-thing">
+      <img src="basemap_mitflutzonen.png">
+    </div>
+    <div class="steps-container">
+      <div class="step" id="step1">
+        <div>
+          <p>The map shows those areas in Germany that are at high risk of fluvial flooding. According to the German Federal Environment Agency, “the most effective way to prevent damage from flooding is not to build in flood zones.”</p>
+          <p>Although dikes and protective walls can offer protection, they are only effective up to a certain water level and for a certain duration of flooding. New buildings in such high-risk-areas are therefore only permitted in special cases.</p>
+        </div>
+      </div>
+      <div class="step" id="step2">
+        <p>However, research now shows that a significant proportion of those high-risk areas in Germany are populated, 17.9 percent in total. This is the result of a data analysis based on population density data from the European Union's Earth Observation Program (<a href="https://github.com/sophiabmnn/PopulationDensityFloodHazardAreas-Lede-Project-3">more on the methodology here</a>). <br><br> Each red point on the map represents a populated area of 0.01 square kilometers in the high-risk area.</p>
+      </div>
+      <div class="step" id="step3">
+        <p>In absolute terms, the largest area of populated high-risk zones is in North Rhine-Westphalia. In part, this is because it is a large federal state with numerous potential flood hazard areas.</p>
+      </div>
+    </div>
+  </section>
+  <div class="content">
+    <p>At the same time, the high-risk areas in North Rhine-Westphalia are also quite densely populated in relative terms: 5.4 percent are populated as “urban centers", another 7.6 percent can be considered as “urban clusters,” i.e., towns or suburbs. In addition, 16.0 percent of high-risk areas are rural.</p>
+    <p>Only Hamburg and the Rhine-Palatinate have a higher share of populated risk areas.</p>
+    <p>Meanwhile, Saarland has no populated areas classified as “high risk” for fluvial flooding, according to the analysis. However, the small state of Saarland has very few such areas in general.</p>
+    <iframe title="Hamburg's flood hazard areas are most densely populated" aria-label="Stacked Bars" id="datawrapper-chart-tyn38" src="https://datawrapper.dwcdn.net/tyn38/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="535" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}})}();</script>
+    <p>A look at Germany as a whole shows that 1.9 percent of high-risk areas are so densely populated that they are considered urban centers. In addition, 4.6 percent can be defined as “urban clusters”, meaning they have roughly the same population as smaller cities and suburbs. Another 11.51 percent are rural areas.</p>
+    <p> Every person who is living in these areas is at risk, potentially every ten to 30 years. And the risk currently increases, making more regular floods likely.</p>
+
+    <iframe title="Almost one in five flood hazard areas in Germany is populated" aria-label="Torten-diagramm" id="datawrapper-chart-oLsJd" src="https://datawrapper.dwcdn.net/oLsJd/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="474" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}})}();</script>
+    <p>The reason for that is climate change: Global warming leads to more extreme rainfalls, which increases the risk of floods. People in the affected areas are likely to be exposed to flooding even more frequently than before.</p>
+    <p>The Federal Environment Agency is therefore calling for precautionary measures, not only from local authorities and the state, but also from individuals. Those who live in high-risk areas should keep themselves regularly informed about heavy rainfall events – and take appropriate precautions, for example at their builings, now.</p>
+  </div>
+  <div class="footer">
+    <div class="content">
+      <p>Note: This website is an exercise for the Lede data journalism program at Columbia University. Text and data have not been editorially reviewed or fact-checked.<br><br>Methodology: The high-risk flood hazard areas were retrieved from <a href="https://geoportal.bafg.de/inspire/download/NZ/hazardArea_flood/datasetfeed.xml">"Bundesanstalt für Gewässerkunde"</a>, the population density data is from the <a href="https://human-settlement.emergency.copernicus.eu/download.php?ds=pop">„Global Human Settlement Layer“ (GHSL) of Copernicus</a>. You can find my more information on <a href="https://github.com/sophiabmnn/PopulationDensityFloodHazardAreas-Lede-Project-3">GitHub.</a></p>
+    </div>
+  </div>
+
+  <script>
+    /*************
+    
+    This is the JavaScript that makes the scrolly work 
+    
+    *************/
+
+    /* 
+    This part attaches a scroll to the element with id="scrolly-images"    
+    */
+    (() => {
+      const scroller = scrollama()
+
+      scroller
+        .setup({
+          parent: document.querySelector("#scrolly-images"),
+          step: ".step",
+          offset: 0.6,
+          debug: false,
+        })
+        .onStepEnter(function ({ element, index, direction }) {
+          const event = new CustomEvent("stepin", { detail: { direction: direction } })
+          element.dispatchEvent(event)
+        })
+        .onStepExit(function ({ element, index, direction }) {
+          const event = new CustomEvent("stepout", { detail: { direction: direction } })
+          if (direction === "up" && element.previousElementSibling) {
+            const event = new CustomEvent("stepin", { detail: { direction: direction } })
+            element.previousElementSibling.dispatchEvent(event)
+          }
+        })
+
+      window.addEventListener("resize", scroller.resize)
+    })()
+
+    /*
+    This part sets up your actions. In this case, it's changing the image in the scrolly container.
+    */
+    d3.select("#step1").on('stepin', (e) => {
+      d3.select(e.target.closest(".scrolly-container")).select("img").attr("src", "basemap_mitflutzonen.png")
+    })
+
+    d3.select("#step2").on('stepin', (e) => {
+      d3.select(e.target.closest(".scrolly-container")).select("img").attr("src", "basemap_flutzonen_pop.png")
+    })
+
+    d3.select("#step3").on('stepin', (e) => {
+      d3.select(e.target.closest(".scrolly-container")).select("img").attr("src", "annotiert_nrw.png")
+    })
+
+  </script>
+  <style>
+    /* Change this to adjust the padding between steps */
+    .step {
+      margin-bottom: 70vh;
+    }
+  </style>
+
+</body>
+
+</html>
